@@ -40,7 +40,7 @@ init_config () {
 	timesize=42
 	datesize=14
 
-	read user config
+	# read user config
 	USER_CONF="$HOME/.config/multilock/config"
 	if [ -e "$USER_CONF" ]; then
 		# shellcheck source=/dev/null
@@ -106,7 +106,7 @@ lock() {
 		--verifcolor="$verifcolor" --timecolor="$timecolor" --datecolor="$datecolor" \
 		--time-font="$font" --date-font="$font" --layout-font="$font" --verif-font="$font" --wrong-font="$font" \
 		--noinputtext='' --force-clock "${lockargs[@]}" \
-		--timesize="$timesize" --datesize="$datesize"
+		--timesize="$timesize" --datesize="$datesize" --modif-align 2
 }
 
 # in case image isn't found
