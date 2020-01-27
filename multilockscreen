@@ -20,22 +20,27 @@ init_config () {
 	# default theme
 	loginbox=00000066
 	loginshadow=00000000
-	locktext="Type password to unlock..."
-	font="sans-serif"
 	ringcolor=ffffffff
-	insidecolor=00000000
-	separatorcolor=00000000
 	ringvercolor=ffffffff
-	insidevercolor=00000000
 	ringwrongcolor=ffffffff
+	insidecolor=00000000
+	insidevercolor=00000000
 	insidewrongcolor=d23c3dff
 	keyhlcolor=d23c3dff
 	bshlcolor=d23c3dff
+	separatorcolor=00000000
 	verifcolor=ffffffff
 	timecolor=ffffffff
 	datecolor=ffffffff
 
-	# read user config
+	# default font/size
+	locktext="Type password to unlock..."
+	font="Inconsolata Nerd Font"
+	timeformat=" %H:%M"
+	timesize=42
+	datesize=14
+
+	read user config
 	USER_CONF="$HOME/.config/multilock/config"
 	if [ -e "$USER_CONF" ]; then
 		# shellcheck source=/dev/null
@@ -90,17 +95,18 @@ lock() {
 	i3lock \
 		-i "$image" \
 		--screen "$display_on" \
-		--timepos='ix-170:iy-0' \
-		--datepos='ix-240:iy+25' \
-		--clock --date-align 1 --datestr "$locktext" \
+		--timepos='ix-160:iy+5' \
+		--datepos='ix-235:iy+30' \
+		--clock --date-align 1 --datestr "$locktext" --timestr "$timeformat" \
 		--insidecolor=$insidecolor --ringcolor=$ringcolor --line-uses-inside \
 		--keyhlcolor=$keyhlcolor --bshlcolor=$bshlcolor --separatorcolor=$separatorcolor \
 		--insidevercolor=$insidevercolor --insidewrongcolor=$insidewrongcolor \
 		--ringvercolor=$ringvercolor --ringwrongcolor=$ringwrongcolor --indpos='x+280:y+h-70' \
-		--radius=20 --ring-width=4 --veriftext='' --wrongtext='' \
+		--radius=25 --ring-width=4 --veriftext='' --wrongtext='' \
 		--verifcolor="$verifcolor" --timecolor="$timecolor" --datecolor="$datecolor" \
 		--time-font="$font" --date-font="$font" --layout-font="$font" --verif-font="$font" --wrong-font="$font" \
-		--noinputtext='' --force-clock "${lockargs[@]}"
+		--noinputtext='' --force-clock "${lockargs[@]}" \
+		--timesize="$timesize" --datesize="$datesize"
 }
 
 # in case image isn't found
